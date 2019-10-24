@@ -1,0 +1,40 @@
+{
+
+  "manifest_version": 2,
+  "name": "CashWeb BB",
+  "version": "1.0",
+
+  "description": "CashWeb client for Firefox.",
+
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["cashlinkify.js"],
+      "run_at": "document_idle"
+    }
+  ],
+
+  "browser_action": {
+    "default_icon": "favicon-32x32.png",
+    "default_title": "CashWeb BB",
+    "default_popup": "cashbb.html",
+    "browser_style": true
+  },
+
+  "protocol_handlers": [
+    {
+      "protocol": "web+cash",
+      "name": "CashWeb Protocol",
+      "uriTemplate": "/cashload.html?cwid=%s"
+    }
+  ],
+
+  "permissions": ["storage"],
+
+  "applications": {
+    "gecko": {
+      "id": "cashweb@cashweb.cash"
+    } 
+  }
+
+}
