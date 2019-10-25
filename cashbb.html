@@ -8,22 +8,90 @@
   <body>
 
     <style>
+
+	@font-face {
+	  font-family: 'Ubuntu';
+	  src: url('Ubuntu-Bold.woff2') format('woff2'),
+	       url('Ubuntu-Bold.woff') format('woff');
+	  font-weight: bold;
+	  font-style: normal;
+	}
+
 	html {
-		background: green;
+	  background: #4cca47;
+	  padding: 1.75rem 0;
 	}
 
 	body {
-		color: white;
+	  color: white;
+	  font-family: 'Ubuntu', sans-serif;
 	}
 
-    	#options {
-		margin: 2rem;
+	h1 {
+	  margin: 0 auto 1.75rem;
+	  padding: 0;
+	  display: block;
 	}
+
+	label {
+	  font-size: 1rem;
+	  margin-right: 1.5rem;
+	}
+
+	label:hover {
+	  cursor: pointer;
+	}
+
+	input {
+	  margin-bottom: 1.2rem;
+	}
+
+	.row {
+	  clear: both;
+	}
+
+	.left {
+	  float: left;
+	}
+
+	.right {
+	  float: right;
+	}
+
+	button {
+  	  width: 50%;
+	  background: #4cca47;
+	  color: white;
+	  border-radius: 0;
+	  border: solid white medium;
+	  font-family: 'Ubuntu', sans-serif;
+	  font-size: 0.9rem;
+	  text-align: center;
+	  line-height: 1.75rem;
+	  cursor: pointer;
+	  margin: 0.5rem auto 0;
+	  display: block;
+	}
+
+	button:hover {
+		background: white;
+		border-color: #4cca47;
+		color: #4cca47;
+	}
+
+	#options {
+	  margin: 0 1.75rem;
+	}
+
     </style>
 
+    <h1>CashWeb BB</h1>
+
     <form id="options">
-        <label>BitDB HTTP Endpoint<input type="text" id="bitdb" ></label>
-        <button type="submit">Save</button>
+        <div class="row"><div class=left><input type="radio" name="source-select" id="source-bitdb" checked><label for="source-bitdb">BitDB:</label></div><div class="right"><input type="text" id="bitdb"></div></div><br>
+        <div class="row"><div class=left><input type="radio" name="source-select" id="source-rest"><label for="source-rest">REST:</label></div><div class="right"><input type="text" id="rest"></div></div><br>
+        <div class="row"><div class=left><input type="radio" name="source-select" id="source-cashserver"><label for="source-cashserver">CashServer:</label></div><div class="right"><input type="text" id="cashserver"></div></div><br>
+        <button type="submit">Save Changes</button>
     </form>
 
     <script src="options.js"></script>
