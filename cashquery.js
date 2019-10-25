@@ -4,48 +4,58 @@ var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,k
 });
 
 const id = decodeURIComponent(vars["cwid"]).replace("web+cash://", "");
-var bitdb = "https://bitdb.bitcoin.com/q";
+var bitdb = 0;
+var rest = 0;
+var cashserver = 0;
 
-var getting = browser.storage.sync.get("bitdb");
-getting.then(function(item) {
-	console.log(item.bitdb);
-	bitdb = item.bitdb;
+browser.storage.sync.get(["source", "bitdb", "rest", "cashserver"]).then(function(item) {
+	switch (item.source) {
+		case 0:
+			bitdb = item.bitdb;
+			break;
+		case 1:
+			rest = item.rest;
+			break;
+		case 2:
+			cashserver = item.cashserver;
+			break;
+	}
 }, function(error) {
 	console.log("failed to load preferences from storage, error: " + error + "; using defaults");
-});
+}).then(function() {
+	if (cashserver) { window.location.href = cashserver + "/" + id; }
 
+	Module.onRuntimeInitialized = async _ => {
+		const CWG = {
+			get_by_id: Module.cwrap('CWG_WA_get_by_id', 'number', ['number', 'number', 'number', 'number'], {async: true}),
+			errno_print_msg: Module.cwrap('CWG_WA_errno_print_msg', 'number', ['number', 'number'])
+		};
 
+		const idPtr = _malloc(id.length+1); stringToUTF8(id, idPtr, id.length+1);
+		const bitdbPtr = _malloc(bitdb.length+1); stringToUTF8(bitdb, bitdbPtr, bitdb.length+1);
 
-Module.onRuntimeInitialized = async _ => {
-	const CWG = {
-		get_by_id: Module.cwrap('CWG_WA_get_by_id', 'number', ['number', 'number', 'number', 'number'], {async: true}),
-		errno_print_msg: Module.cwrap('CWG_WA_errno_print_msg', 'number', ['number', 'number'])
-	};
+		const mimeStrPtr = _malloc(256);
+		const fName = id.replace(/\//g, "-");
+		var stream = FS.open(fName, 'w');
+		var errno = await CWG.get_by_id(idPtr, bitdbPtr, mimeStrPtr, stream.fd);	
+		FS.close(stream);
+		const mimeStr = UTF8ToString(mimeStrPtr);
+		_free(mimeStrPtr);
 
-	const idPtr = _malloc(id.length+1); stringToUTF8(id, idPtr, id.length+1);
-	const bitdbPtr = _malloc(bitdb.length+1); stringToUTF8(bitdb, bitdbPtr, bitdb.length+1);
+		_free(bitdbPtr);
+		_free(idPtr);
 
-	const mimeStrPtr = _malloc(256);
-	const fName = id.replace(/\//g, "-");
-	var stream = FS.open(fName, 'w');
-	var errno = await CWG.get_by_id(idPtr, bitdbPtr, mimeStrPtr, stream.fd);	
-	FS.close(stream);
-	const mimeStr = UTF8ToString(mimeStrPtr);
-	_free(mimeStrPtr);
-
-	_free(bitdbPtr);
-	_free(idPtr);
-
-	if (errno != 0) {
-		FS.unlink(fName);
-		const msgPtr = CWG.errno_print_msg(errno);
-		const msg = UTF8ToString(msgPtr) + ".\n";
-		document.getElementById("load-wheel").style.display = "none";
-		document.getElementById("err-header").innerHTML = msg;
-	} else {
-		const file = new File([FS.readFile(fName)], {type: mimeStr});	
-		FS.unlink(fName);
-		document.getElementById("load-wheel").style.display = "none";
-		window.location.href = URL.createObjectURL(file);
-	}				
-}
+		if (errno != 0) {
+			FS.unlink(fName);
+			const msgPtr = CWG.errno_print_msg(errno);
+			const msg = UTF8ToString(msgPtr) + ".\n";
+			document.getElementById("load-wheel").style.display = "none";
+			document.getElementById("err-header").innerHTML = msg;
+		} else {
+			const file = new File([FS.readFile(fName)], {type: mimeStr});	
+			FS.unlink(fName);
+			document.getElementById("load-wheel").style.display = "none";
+			window.location.href = URL.createObjectURL(file);
+		}				
+	}
+})
