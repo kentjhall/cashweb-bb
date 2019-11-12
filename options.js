@@ -1,3 +1,5 @@
+var browser = browser || chrome;
+
 function saveOptions(e) {
   e.preventDefault();
 
@@ -36,7 +38,7 @@ function restoreOptions() {
     console.log(`Error: ${error}`);
   }
 
-  browser.storage.sync.get(["source", "bitdb", "rest", "cashserver"]).then(setCurrentChoice, onError);
+  browser.storage.sync.get(["source", "bitdb", "rest", "cashserver"], setCurrentChoice);
 }
 
 document.addEventListener("DOMContentLoaded", restoreOptions);

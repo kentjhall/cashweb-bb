@@ -2,11 +2,20 @@
 <html>
 	<head>
 	<meta charset="utf-8"/>
-	<script src="./cashgettools.js"></script>
+	<script src="./cashgettools_wasm.js"></script>
 	<script src="./cashquery.js"></script>
 	<style>
+		@font-face {
+			font-family: 'Ubuntu';
+			src: url('Ubuntu-Bold.woff2') format('woff2'),
+		       	     url('Ubuntu-Bold.woff') format('woff');
+			font-weight: bold;
+			font-style: normal;
+		}
+
 		body {
 			background: #4d4d4d;
+			font-family: 'Ubuntu', sans-serif;
 		}
 
 		#err-header, #status-header {
