@@ -13,7 +13,8 @@ function saveOptions(e) {
     source: i,
     bitdb: document.querySelector("#bitdb").value,
     rest: document.querySelector("#rest").value,
-    cashserver: document.querySelector("#cashserver").value
+    cashserver: document.querySelector("#cashserver").value,
+    linkify: document.querySelector("#switch-linkify").checked
   });
 
   window.close();
@@ -32,13 +33,14 @@ function restoreOptions() {
     document.querySelector("#bitdb").value = result.bitdb || "https://bitdb.bitcoin.com/q";
     document.querySelector("#rest").value = result.rest || "https://rest.bitcoin.com/v2";
     document.querySelector("#cashserver").value = result.cashserver || "http://cashweb.cash/q";
+    document.querySelector("#switch-linkify").checked = result.linkify || true;
   }
 
   function onError(error) {
     console.log(`Error: ${error}`);
   }
 
-  browser.storage.sync.get(["source", "bitdb", "rest", "cashserver"], setCurrentChoice);
+  browser.storage.sync.get(["source", "bitdb", "rest", "cashserver", "linkify"], setCurrentChoice);
 }
 
 document.addEventListener("DOMContentLoaded", restoreOptions);

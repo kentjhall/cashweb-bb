@@ -43,11 +43,8 @@
 	  cursor: pointer;
 	}
 
-	input {
-	  margin-bottom: 1.2rem;
-	}
-
 	.row {
+	  margin-bottom: 1.2rem;
 	  min-width: max-content;
 	  clear: both;
 	}
@@ -60,6 +57,64 @@
 	  float: right;
 	}
 
+	#linkify-row {
+		max-width: min-content;
+		text-align: center;
+		margin: 0 auto 3rem;
+		display: block;
+	}
+
+	#linkify-row label {
+	  line-height: 20px;
+	}
+
+	.switch {
+	  position: relative;
+	  display: inline-block;
+	  width: 45px;
+	  height: 20px;
+	}
+
+	.switch input {
+	  opacity: 0;
+	  width: 0;
+	  height: 0;
+	}
+
+	.slider {
+	  position: absolute;
+	  cursor: pointer;
+	  top: 0;
+	  left: 0;
+	  right: 0;
+	  bottom: 0;
+	  background-color: white;
+	  -webkit-transition: .2s;
+	  transition: .2s;
+	}
+
+	.slider:before {
+	  position: absolute;
+	  content: "";
+	  height: 14px;
+	  width: 19.5px;
+	  left: 3px;
+	  bottom: 3px;
+	  background-color: #ccc;
+	  -webkit-transition: .2s;
+	  transition: .2s;
+	}
+
+	input:checked + .slider:before {
+	  background-color: #4cca47;
+	}
+
+	input:checked + .slider:before {
+	  -webkit-transform: translateX(19.5px);
+	  -ms-transform: translateX(19.5px);
+	  transform: translateX(19.5px);
+	} 
+
 	button {
   	  width: 50%;
 	  background: #4cca47;
@@ -71,7 +126,7 @@
 	  text-align: center;
 	  line-height: 1.75rem;
 	  cursor: pointer;
-	  margin: 0.5rem auto 0;
+	  margin: 0 auto;
 	  display: block;
 	}
 
@@ -93,7 +148,14 @@
         <div class="row"><div class=left><input type="radio" name="source-select" id="source-bitdb" checked><label for="source-bitdb">BitDB:</label></div><div class="right"><input type="text" id="bitdb"></div></div><br>
         <div class="row"><div class=left><input type="radio" name="source-select" id="source-rest"><label for="source-rest">REST:</label></div><div class="right"><input type="text" id="rest"></div></div><br>
         <div class="row"><div class=left><input type="radio" name="source-select" id="source-cashserver"><label for="source-cashserver">CashServer:</label></div><div class="right"><input type="text" id="cashserver"></div></div><br>
-        <button type="submit">Save Changes</button>
+	<div class="row" id="linkify-row">
+	    <div class="left"><label for="switch-linkify">Linkify</label></div>
+	    <div class="right"><label class="switch">
+	        <input type="checkbox" id="switch-linkify">
+	        <span class="slider"></span>
+	    </label></div>
+	</div>
+        <div class="row"><button type="submit">Save Changes</button></div>
     </form>
 
     <script src="options.js"></script>
