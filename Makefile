@@ -1,8 +1,8 @@
 firefox: cashlinkify.js
-	ln -sf manifest-ff.json manifest.json
+	cp manifest-ff.json manifest.json
 
 chrome: cashlinkify.js
-	ln -sf manifest-chrome.json manifest.json
+	cp manifest-chrome.json manifest.json
 
 cashlinkify.js: cashlinkify_node.js
 	browserify cashlinkify_node.js -o cashlinkify.js
