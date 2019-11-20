@@ -14,7 +14,7 @@ function saveOptions(e) {
     bitdb: document.querySelector("#bitdb").value,
     rest: document.querySelector("#rest").value,
     cashserver: document.querySelector("#cashserver").value,
-    linkify: document.querySelector("#switch-linkify").checked
+    linkify: document.querySelector("#switch-linkify").checked == true ? "true" : "false"
   });
 
   window.close();
@@ -33,7 +33,7 @@ function restoreOptions() {
     document.querySelector("#bitdb").value = result.bitdb || "https://bitdb.bitcoin.com/q";
     document.querySelector("#rest").value = result.rest || "https://rest.bitcoin.com/v2";
     document.querySelector("#cashserver").value = result.cashserver || "http://cashweb.cash/q";
-    document.querySelector("#switch-linkify").checked = result.linkify || true;
+    document.querySelector("#switch-linkify").checked = result.linkify ? result.linkify == "true" : true;
   }
 
   function onError(error) {

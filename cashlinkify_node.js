@@ -14,7 +14,7 @@ const { default: PQueue } = require('p-queue')
   }
 		
   browser.storage.sync.get(["linkify"]).then(function(item) {
-    if (!item.linkify) {
+    if (item.linkify != "true") {
       return
     }
 
