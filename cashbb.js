@@ -43,9 +43,9 @@ function restoreOptions() {
 
 function saveHandler(e) {
 	saveOptions(e);
-	var query=document.getElementById("query").value;
-	if (document.getElementById("cashbb-query") && query.length) {
-		browser.tabs.create({'url': browser.extension.getURL("cashload.html")+"?cwid="+query});
+	var query = document.getElementById("query");
+	if (query && query.value.length) {
+		browser.tabs.create({'url': browser.extension.getURL("cashload.html")+"?cwid="+query.value});
 	}
 	window.close();
 }

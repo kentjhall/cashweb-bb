@@ -17,7 +17,7 @@ chrome: cashlinkify.js
 	cp manifest-chrome.json manifest.json
 
 chrome-dist: chrome
-	zip -r cashweb-bb-chrome.zip . -x ${DIST_EXCLUDE} cashbb.html
+	zip -r cashweb-bb-chrome.zip . -x ${DIST_EXCLUDE} cashbb.html pdfjs/\*
 
 cashlinkify.js: cashlinkify_node.js
 	browserify cashlinkify_node.js -o cashlinkify.js
