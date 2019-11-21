@@ -138,9 +138,10 @@ const { default: PQueue } = require('p-queue')
         // put in text up to the link
         span.appendChild(document.createTextNode(txt.substring(point, match.index)))
         // create a link and put it in the span
+	const isFirefox = typeof InstallTrigger !== 'undefined';
         const a = document.createElement('a')
         a.className = 'linkifiedCashwebAddress'
-        a.setAttribute('href', match[0])
+        a.setAttribute('href', isFirefox ? match[0] : browser.extension.getURL("cashload.html")+"?cwid="+match[2])
         a.setAttribute('target', "_blank");
         a.appendChild(textChunk)
         span.appendChild(a)

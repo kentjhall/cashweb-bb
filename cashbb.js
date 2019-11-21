@@ -16,8 +16,6 @@ function saveOptions(e) {
     cashserver: document.querySelector("#cashserver").value,
     linkify: document.querySelector("#switch-linkify").checked == true ? "true" : "false"
   });
-
-  window.close();
 }
 
 function restoreOptions() {
@@ -43,5 +41,14 @@ function restoreOptions() {
   browser.storage.sync.get(["source", "bitdb", "rest", "cashserver", "linkify"], setCurrentChoice);
 }
 
+function saveHandler(e) {
+	saveOptions(e);
+	var query=document.getElementById("query").value;
+	if (document.getElementById("cashbb-query") && query.length) {
+		browser.tabs.create({'url': browser.extension.getURL("cashload.html")+"?cwid="+query});
+	}
+	window.close();
+}
+
 document.addEventListener("DOMContentLoaded", restoreOptions);
-document.querySelector("form").addEventListener("submit", saveOptions);
+document.querySelector("form").addEventListener("submit", saveHandler);

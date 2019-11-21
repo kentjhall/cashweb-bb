@@ -14,13 +14,19 @@
     }
   ],
 
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+
+  "web_accessible_resources": [
+    "cashload.html"
+  ], 
+
   "browser_action": {
     "default_icon": "favicon-32x32.png",
     "default_title": "CashWeb BB",
-    "default_popup": "cashbb.html",
+    "default_popup": "cashbb-chrome.html",
     "browser_style": true
   },
 
-  "permissions": ["storage", "downloads"]
+  "permissions": ["storage", "tabs"]
 
 }

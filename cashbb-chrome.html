@@ -49,7 +49,7 @@
 	}
 
 	.left {
-	  margin-bottom: 1.2rem;
+	  margin-bottom: 0.7rem;
 	  float: left;
 	}
 
@@ -57,15 +57,23 @@
 	  float: right;
 	}
 
-	#linkify-row {
+	#linkify-row, #query-row {
 		max-width: min-content;
 		text-align: center;
-		margin: 0 auto 3rem;
+		margin: 0 auto 0;
 		display: block;
+	}
+
+	#linkify-row {
+		margin-bottom: 2.7rem;
 	}
 
 	#linkify-row label {
 	  line-height: 20px;
+	}
+
+	#query-row {
+		margin-bottom: 1rem;
 	}
 
 	.switch {
@@ -145,8 +153,8 @@
     <h1>CashWeb BB</h1>
 
     <form id="options">
-        <div class="row"><div class=left><input type="radio" name="source-select" id="source-bitdb" checked><label for="source-bitdb">BitDB:</label></div><div class="right"><input type="text" id="bitdb"></div></div>
-        <div class="row"><div class=left><input type="radio" name="source-select" id="source-rest"><label for="source-rest">REST:</label></div><div class="right"><input type="text" id="rest"></div></div>
+	    <div class="row"><div class=left><input type="radio" name="source-select" id="source-bitdb" checked><label for="source-bitdb">BitDB:</label></div><div class="right"><input type="text" id="bitdb"></div></div>
+	    <div class="row"><div class=left><input type="radio" name="source-select" id="source-rest"><label for="source-rest">REST:</label></div><div class="right"><input type="text" id="rest"></div></div>
         <div class="row"><div class=left><input type="radio" name="source-select" id="source-cashserver"><label for="source-cashserver">CashServer:</label></div><div class="right"><input type="text" id="cashserver"></div></div>
 	<div class="row" id="linkify-row">
 	    <div class="left"><label for="switch-linkify">Linkify</label></div>
@@ -155,9 +163,11 @@
 	        <span class="slider"></span>
 	    </label></div>
 	</div>
-        <div class="row"><button type="submit">Save Changes</button></div>
+        <div class="row" id="query-row"><label for="query">web+cash://</label><input type="text" id="query"></div>
+        <div class="row"><button type="submit">Save/Get</button></div>
     </form>
 
+    <div id="cashbb-query"></div>
     <script src="cashbb.js"></script>
 
   </body>
