@@ -10,7 +10,7 @@ File queries may be sourced from any BitDB node, REST endpoint (much slower), or
 
 REST is available as an option, but it's a very slow one, and perhaps less reliable; I recommend ignoring it.
 
-Loading from BitDB/REST will not load an entire webpage (interpreting HTML); it just downloads the requested file. For example, if you have set to source from BitDB and query for web+cash://~cashweb/index.html, you will see a completely unstyled page (just the HTML); if you make the same query when sourcing from a CashServer, it will load all the page's assets as well. This is a consequence of how the browser handles/interprets files from a typical server versus a local extension; it doesn't know where to make additional requests for assets. I may look into finding a way around this.
+Loading from BitDB/REST will not load an entire webpage (interpreting HTML); it just downloads the requested file. For example, if you have set to source from BitDB and query for web+cash://~cashweb/index.html , you will see a completely unstyled page (just the HTML); if you make the same query when sourcing from a CashServer, it will load all the page's assets as well. This is a consequence of how the browser handles/interprets files from a typical server versus a local extension; it doesn't know where to make additional requests for assets. I may look into finding a way around this.
 
 
 ## License
