@@ -1,7 +1,7 @@
 # The CashWeb Browser Buddy
 
 A browser extension implementing the cashgettools [Javascript build](https://github.com/kentjhall/cashweb#build-to-javascript-webassembly).<br>
-Available on [Firefox](https://addons.mozilla.org/en-US/firefox/addon/cashweb-bb/?src=search) and Chrome (pending review).
+Available on [Firefox](https://addons.mozilla.org/en-US/firefox/addon/cashweb-bb/?src=search) and [Chrome](https://chrome.google.com/webstore/detail/cashweb-bb/oleogcnfpjebmamnenggcmmphhghdolj).
 
 File queries may be sourced from any BitDB node, REST endpoint (much slower), or trusted CashServer (faster). Also linkifies text of the form *web+cash://\<id\>* to make properly clickable. The *web+cash://* protocol should be used for making queries in the address bar (except in Chrome, where custom protocol handlers for extensions aren't yet supported; instead, query from within the extension popup).
 
